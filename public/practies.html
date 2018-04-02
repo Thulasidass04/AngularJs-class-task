@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practies</title>
+	<link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+	<h1>{{name}}</h1>
+	<h2>{{userList}}</h2>
+	<script type="text/javascript">
+		function myCtrl($scope,myProvider){
+			console.log('MYCTRL');
+			myProvider.getList()
+			.then(function(list){
+				$scope.userList = list;
+			})
+			
+		}
+		myCtrl.$inject = ['$scope','myProvider'];
+		function myProvider(){
+			let name = "user-list";
+			this.$get = ['$http','$q',function($http,$q){
+				let services = {};
+				services.getList = function(){
+					let defer = $q.defer();
+					$http.get('./' + name + '.json')
+					.then(function(resdata){
+						console.log("Res_",resdata);
+						defer.resolve(resdata.data.Data);
+					})
+					return defer.promise;
+				}
+				return services;
+			}]
+		}
+		myProvider.$inject = [];
+		angular.module('myApp',[])
+		  .controller('myCtrl',myCtrl)
+		  .provider('myProvider',myProvider)
+	</script>
+	<script type="text/javascript">
+		angular.bootstrap(document.documentElement,['myApp'],{strictDi : true});
+	</script>
+
+</body>
+</html>

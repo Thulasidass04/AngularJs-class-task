@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>NodeJs</title>
+	<link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+    
+    <div class="container">
+        <div class="col-md-4">
+            <h1>DateBase</h1>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in userList | orderBy : 'id'">
+                        <!-- <td>{{$index + 1}}</td> -->
+                        <td>{{user.id}}</td>
+                        <td>{{user.name | uppercase }}</td>
+                        <td>{{user.age}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<script type="text/javascript">
+	angular.module('myApp',[])
+     .controller('myCtrl', function ($scope,myFactory) {
+         console.log('MYCTRL');
+         myFactory.userGetList(function(dataResponse){
+            console.log("RES_",dataResponse);
+            $scope.userList = dataResponse.data.response;
+
+         })
+     })
+
+     .factory('myFactory',function($http){
+        let user ={};
+        user.userGetList = function(cb){
+           $http.get('./test.json')
+            .then(function(resData){
+                console.log("Factory_RES_",resData);
+                cb(resData);
+
+            },function(err){
+                console.log(err);
+                cb(err);
+            })
+        }
+
+
+        return user;
+
+     })
+
+</script>
+</body>
+</html>

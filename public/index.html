@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>NodeJS</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+</head>
+<style>
+[ng-cloak] {
+    display: none;
+}
+</style>
+
+<body ng-controller="myCtrl" ng-cloak>
+    <h1>DateBase</h1>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>BookingStatus : {{panelData.BookingStatus}}</h2></div>
+            <div class="panel-body">
+                <h2>Destination: {{panelData.Destination}}</h2></div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>FirstName</th>
+                        <td>{{users.Customer.PaxName.PassengerFirstName}}</td>
+                    </tr>
+                    <tr>
+                        <th>LastName</th>
+                        <td>{{users.Customer.PaxName.PassengerLastName}}</td>
+                    </tr>
+                    <tr>
+                        <th>PassportNumber</th>
+                        <td>{{users.Customer.PassportNumber}}</td>
+                    </tr>
+                    <tr>
+                        <th>PassportNationality</th>
+                        <td>{{users.Customer.PassportNationality}}</td>
+                    </tr>
+                    <tr>
+                        <th>PassportIssuanceCountry</th>
+                        <td>{{users.Customer.PassportIssuanceCountry}}</td>
+                    </tr>
+                    <tr>
+                        <th>PassportExpiresOn</th>
+                        <td>{{users.Customer.PassportExpiresOn}}</td>
+                    </tr>
+                    <tr>
+                        <th>EmailAddress</th>
+                        <td>{{users.Customer.EmailAddress}}</td>
+                    </tr>
+                    <tr>
+                        <th>DateOfBirth</th>
+                        <td>{{users.Customer.DateOfBirth}}</td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td>Year:{{users.Customer.Age.Years}}
+                        Month:{{users.Customer.Age.Months}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{users.Customer.Gender}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+    angular.module('myApp', [])
+        .controller('myCtrl', ($scope, myFactory) => {
+            console.log('MYCTRL');
+            myFactory.userGetList()
+                .then(data => {
+                    console.log('data -', data.TravelItinerary.ItineraryInfo.CustomerInfos)
+                    $scope.panelData = data.TravelItinerary;
+                    $scope.users = data.TravelItinerary.ItineraryInfo.CustomerInfos[0];
+                })
+                .catch(err => console.log(err))
+        })
+
+        .factory('myFactory', function($http) {
+            let services = {};
+            services.userGetList = function() {
+                return $http.get('./sample.json')
+                    .then(function(resData) {
+                            console.log('Fac_Res_', resData.data);
+                            return resData.data
+                        })
+                    .catch(err => {
+                        return err
+                    })
+            }
+            return services;
+        })
+    </script>
+</body>
+
+</html>

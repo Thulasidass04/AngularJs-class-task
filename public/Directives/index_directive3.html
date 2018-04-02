@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Angular Directives</title>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <div my-dir name="name"></div>
+    <script type="text/javascript">
+    angular.module('myApp', [])
+        .controller('myCtrl', function($scope, Sample) {
+            console.log('myCtrl');
+            $scope.list = {names: "prakash"}
+            Sample.getData()
+                .then(data => $scope.name = data.data.response)
+        })
+
+        .factory('Sample', function($http) {
+            let dataObject = {};
+            dataObject.getData = function() {
+                return $http.get('../test.json')
+                    .then(data => {
+                        return data
+                    })
+                    .catch(error => console.log('error'))
+            }
+            return dataObject
+        })
+
+        .directive('myDir', function() {
+            return {
+                restrict: 'A',
+                scope: {
+                	lists: '=list'
+                },
+                templateUrl: "./dir.tpl.html",
+                controller: ["$scope","scope", function($scope, scope) {
+
+                    $scope.userList = name;
+                    console.log("in dir", scope.lists);
+
+                    $scope.edit = function(data) {
+                        editUser = $scope.userList.filter(list => {
+                            return list.id == data;
+                        })
+                        $scope.abc = editUser[0];
+                        $scope.register = {};
+                        $scope.register.id = $scope.abc.id;
+                        $scope.register.name = $scope.abc.name;
+                        $scope.register.age = $scope.abc.age;
+                    }
+                    $scope.Deleted = function(data) {
+                        $scope.userList.splice(data, 1);
+                    }
+                    $scope.RegisterMe = function(data) {
+                        let id = data.id - 1;
+                        $scope.userList.splice(id, 1, data);
+                        console.log($scope.userList);
+                    }
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>

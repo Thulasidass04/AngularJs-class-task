@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp1">
+
+<head>
+    <title>Angular Training</title>
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl1">
+    <script type="text/javascript">
+    angular.module('myApp1', [])
+        .controller('myCtrl1', function($scope, myFactory1) {
+            myFactory1.getUserList(function(datares) {
+                console.log('Response data -', datares);
+            })
+            console.log('myCtrl1')
+        })
+        .factory('myFactory1', function($http) {
+            let service = {};
+              service.getUserList = function(cb){
+              	$http.get('./test.json')
+              	.then(function(resData){
+              		console.log("RES_",resData);
+              		cb(resData);
+
+
+              	},
+                  function(err){
+                  	console.log(err);
+                  	cb(resData);
+                  })
+              
+              }
+            return service;
+        })
+    </script>
+</body>
+
+</html>

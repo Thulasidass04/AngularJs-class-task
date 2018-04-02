@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Router</title>
+	<link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+</head>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Router Header</h1>
+		</div>
+		<div>
+			<ui-view></ui-view>
+		</div>
+		<div class="col-md-12">
+			<h1>Router Footer</h1>
+		</div>
+		
+	</div>
+	
+</div>
+<body ng-controller="myCtrl">
+	<script type="text/javascript">
+		angular.module('myApp',['ui.router'])
+		 .controller('myCtrl',function($scope){
+		 	console.log('MYCTRL');
+		 })
+
+		 .config(function($stateProvider,$urlRouterProvider){
+		 	$stateProvider
+		 	     .state('home',{
+		 	     	url:'/home',
+		 	     	template:"<h1>HOME STATE</h2>"
+		 	     })
+		 	     .state('about',{
+		 	     	url:'/about',
+		 	     	template:"<h1>ABOUT STATE</h2>"
+		 	     })
+		 	  $urlRouterProvider.otherwise('home');   
+		 })
+	</script>
+     
+
+
+</body>
+</html>

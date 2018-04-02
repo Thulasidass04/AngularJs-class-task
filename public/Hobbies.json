@@ -1,0 +1,28 @@
+{
+	"Data": [
+    {
+        "id": "1",
+        "name": "Listening Songs"
+
+    },
+    {
+        "id": "2",
+        "name": "Reading Books"
+
+    },
+    {
+        "id": "3",
+        "name": "Writing Stories"
+
+    },
+    {
+        "id": "4",
+        "name": "Reading Newspaper"
+
+    },
+    {
+        "id": "5",
+        "name": "Seeing News Channels"
+
+    }]
+}

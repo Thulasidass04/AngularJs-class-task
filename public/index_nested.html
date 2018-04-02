@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Nested Router</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <div class="container">
+        <div class="col-md-8" style="margin-top: 30px;">
+            <div class="row">
+            	<div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a ui-sref="home">Home</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a ui-sref="about">About</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+    	<div class="row">
+    		<div ui-view>
+    			
+    		</div>
+    		
+    	</div>
+    	
+    </div>
+    <script type="text/javascript">
+    angular.module('myApp', ['ui.router'])
+        .controller('myCtrl', function() {
+            console.log('Nested_Router');
+        })
+        .controller('HomeCtrl', function() {
+            console.log('Home_Ctrl');
+        })
+        .controller('UserCtrl', function() {
+            console.log('User_Ctrl');
+        })
+        .controller('AboutCtrl', function() {
+            console.log('About_Ctrl');
+        })
+
+
+
+        .config(function($stateProvider, $urlRouterProvider) {
+            $stateProvider
+             .state('home', {
+                url: "/home",
+                templateUrl: "./templates/home.html",
+                controller:"HomeCtrl"
+            })
+             .state('home.user',{
+             	url: "/user",
+                templateUrl: "./templates/user.html",
+                controller:"UserCtrl"
+             })
+             .state('about', {
+                url: "/about",
+                templateUrl: "./templates/about.html",
+                controller:"AboutCtrl"
+
+            })
+
+            $urlRouterProvider.otherwise('home');
+        })
+    </script>
+</body>
+
+</html>

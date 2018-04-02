@@ -1,0 +1,198 @@
+{
+    "Errors": [],
+    "Success": true,
+    "Target": 2,
+    "TravelItinerary": {
+        "BookingNotes": [],
+        "BookingStatus": "Pending",
+        "CrossBorderIndicator": false,
+        "Destination": "BLR",
+        "FareType": "Public",
+        "IsCommissionable": false,
+        "IsMOFare": false,
+        "ItineraryInfo": {
+            "BookedReservedItems": [],
+            "ClientUTCOffset": 5.5,
+            "CustomerInfos": [
+                {
+                    "Customer": {
+                        "Age": {
+                            "Months": "1",
+                            "Years": "36"
+                        },
+                        "DateOfBirth": "1982-02-01T00:00:00",
+                        "EmailAddress": "shivarajnaidu@gmail.com",
+                        "Gender": "M",
+                        "KnownTravelerNo": "",
+                        "NameNumber": 46962,
+                        "NationalID": "",
+                        "PassengerNationality": "Indian",
+                        "PassengerType": 1,
+                        "PassportExpiresOn": "2030-02-01T00:00:00",
+                        "PassportIssuanceCountry": "India",
+                        "PassportNationality": "Indian",
+                        "PassportNumber": "2342543453534454",
+                        "PaxName": {
+                            "PassengerFirstName": "YUVARAJ",
+                            "PassengerLastName": "VM",
+                            "PassengerTitle": "MR"
+                        },
+                        "PhoneNumber": "91-9498002109",
+                        "PostCode": "",
+                        "RedressNo": ""
+                    },
+                    "ETickets": [],
+                    "SSRs": [
+                        {
+                            "ItemRPH": 1,
+                            "MealPreference": "",
+                            "SeatPreference": "",
+                            "SegmentInformations": []
+                        }
+                    ]
+                }
+            ],
+            "ItineraryPricing": {
+                "EquiFare": {
+                    "Amount": "1902.50",
+                    "CurrencyCode": "INR",
+                    "DecimalPlaces": 2
+                },
+                "ServiceTax": {
+                    "Amount": "34.25",
+                    "CurrencyCode": "INR",
+                    "DecimalPlaces": 2
+                },
+                "Tax": {
+                    "Amount": "15342.25",
+                    "CurrencyCode": "INR",
+                    "DecimalPlaces": 2
+                },
+                "TotalFare": {
+                    "Amount": "17244.75",
+                    "CurrencyCode": "INR",
+                    "DecimalPlaces": 2
+                }
+            },
+            "ReservationItems": [
+                {
+                    "AirEquipmentType": "73H",
+                    "AirlinePNR": "",
+                    "ArrivalAirportLocationCode": "BOM",
+                    "ArrivalDateTime": "2018-03-07T00:20:00",
+                    "ArrivalTerminal": "",
+                    "Baggage": "SB",
+                    "CabinClassText": "",
+                    "DepartureAirportLocationCode": "BLR",
+                    "DepartureDateTime": "2018-03-06T22:45:00",
+                    "DepartureTerminal": "",
+                    "FlightNumber": "7146",
+                    "ItemRPH": 1,
+                    "JourneyDuration": "205",
+                    "MarketingAirlineCode": "9W",
+                    "NumberInParty": 1,
+                    "OperatingAirlineCode": "S2",
+                    "ResBookDesigCode": "W",
+                    "ResBookDesigText": "",
+                    "StopQuantity": 0
+                },
+                {
+                    "AirEquipmentType": "73H",
+                    "AirlinePNR": "",
+                    "ArrivalAirportLocationCode": "DXB",
+                    "ArrivalDateTime": "2018-03-07T03:35:00",
+                    "ArrivalTerminal": "",
+                    "Baggage": "SB",
+                    "CabinClassText": "",
+                    "DepartureAirportLocationCode": "BOM",
+                    "DepartureDateTime": "2018-03-07T01:40:00",
+                    "DepartureTerminal": "",
+                    "FlightNumber": "580",
+                    "ItemRPH": 2,
+                    "JourneyDuration": "190",
+                    "MarketingAirlineCode": "9W",
+                    "NumberInParty": 1,
+                    "OperatingAirlineCode": "9W",
+                    "ResBookDesigCode": "W",
+                    "ResBookDesigText": "",
+                    "StopQuantity": 0
+                },
+                {
+                    "AirEquipmentType": "73H",
+                    "AirlinePNR": "",
+                    "ArrivalAirportLocationCode": "BOM",
+                    "ArrivalDateTime": "2018-03-13T20:50:00",
+                    "ArrivalTerminal": "",
+                    "Baggage": "SB",
+                    "CabinClassText": "",
+                    "DepartureAirportLocationCode": "DXB",
+                    "DepartureDateTime": "2018-03-13T16:10:00",
+                    "DepartureTerminal": "",
+                    "FlightNumber": "535",
+                    "ItemRPH": 3,
+                    "JourneyDuration": "75",
+                    "MarketingAirlineCode": "9W",
+                    "NumberInParty": 1,
+                    "OperatingAirlineCode": "9W",
+                    "ResBookDesigCode": "W",
+                    "ResBookDesigText": "",
+                    "StopQuantity": 0
+                },
+                {
+                    "AirEquipmentType": "73H",
+                    "AirlinePNR": "",
+                    "ArrivalAirportLocationCode": "BLR",
+                    "ArrivalDateTime": "2018-03-14T00:15:00",
+                    "ArrivalTerminal": "",
+                    "Baggage": "SB",
+                    "CabinClassText": "",
+                    "DepartureAirportLocationCode": "BOM",
+                    "DepartureDateTime": "2018-03-13T23:00:00",
+                    "DepartureTerminal": "",
+                    "FlightNumber": "2140",
+                    "ItemRPH": 4,
+                    "JourneyDuration": "75",
+                    "MarketingAirlineCode": "9W",
+                    "NumberInParty": 1,
+                    "OperatingAirlineCode": "S2",
+                    "ResBookDesigCode": "W",
+                    "ResBookDesigText": "",
+                    "StopQuantity": 0
+                }
+            ],
+            "TripDetailsPTC_FareBreakdowns": [
+                {
+                    "PassengerTypeQuantity": {
+                        "Code": 1,
+                        "Quantity": 1
+                    },
+                    "TripDetailsPassengerFare": {
+                        "EquiFare": {
+                            "Amount": "1902.50",
+                            "CurrencyCode": "INR",
+                            "DecimalPlaces": 2
+                        },
+                        "ServiceTax": {
+                            "Amount": "34.25",
+                            "CurrencyCode": "INR",
+                            "DecimalPlaces": 2
+                        },
+                        "Tax": {
+                            "Amount": "15342.25",
+                            "CurrencyCode": "INR",
+                            "DecimalPlaces": 2
+                        },
+                        "TotalFare": {
+                            "Amount": "17244.75",
+                            "CurrencyCode": "INR",
+                            "DecimalPlaces": 2
+                        }
+                    }
+                }
+            ]
+        },
+        "Origin": "BLR",
+        "TicketStatus": "",
+        "UniqueID": "MF03908518"
+    }
+}

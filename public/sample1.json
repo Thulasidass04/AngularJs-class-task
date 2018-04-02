@@ -1,0 +1,248 @@
+{
+	"data": {
+		"usersList": [
+    {
+        "id": "1",
+        "name": "Thulasidass",
+        "age": "22"
+    },
+    {
+        "id": "2",
+        "name": "BabuJaya",
+        "age": "21"
+    },
+    {
+        "id": "3",
+        "name": "Udhaya",
+        "age": "25"
+    },
+    {
+        "id": "4",
+        "name": "Prakash",
+        "age": "25"
+    },
+    {
+        "id": "5",
+        "name": "Magesh",
+        "age": "26"
+    },
+    {
+        "id": "6",
+        "name": "Babu",
+        "age": "26"
+    },
+    {
+        "id": "7",
+        "name": "Prasad",
+        "age": "24"
+	}],
+	"Hoobies": [
+    {
+        "id": "1",
+        "name": "Listening Songs"
+
+    },
+    {
+        "id": "2",
+        "name": "Reading Books"
+
+    },
+    {
+        "id": "3",
+        "name": "Writing Stories"
+
+    },
+    {
+        "id": "4",
+        "name": "Reading Newspaper"
+
+    },
+    {
+        "id": "5",
+        "name": "Seeing News Channels"
+
+    }],
+	 "Entertainment": [
+    {
+        "id": "1",
+        "name": "Games"
+
+    },
+    {
+        "id": "2",
+        "name": "Movies"
+
+    },
+    {
+        "id": "3",
+        "name": "Cricket"
+
+    },
+    {
+        "id": "4",
+        "name": "Volleyball"
+
+    },
+    {
+        "id": "5",
+        "name": "FootBall"
+
+    }],
+    "Hoobies": [
+    {
+        "id": "1",
+        "name": "Listening Songs"
+
+    },
+    {
+        "id": "2",
+        "name": "Reading Books"
+
+    },
+    {
+        "id": "3",
+        "name": "Writing Stories"
+
+    },
+    {
+        "id": "4",
+        "name": "Reading Newspaper"
+
+    },
+    {
+        "id": "5",
+        "name": "Seeing News"
+
+    }],
+    "Color": [
+    {
+        "id": "1",
+        "name": "Blue"
+
+    },
+    {
+        "id": "2",
+        "name": "SkyBlue"
+
+    },
+    {
+        "id": "3",
+        "name": "Green"
+
+    },
+    {
+        "id": "4",
+        "name": "Red"
+
+    },
+    {
+        "id": "5",
+        "name": "Yellow"
+
+    }], 
+    "Chocolate": [
+    {
+        "id": "1",
+        "name": "Dairy Milk"
+
+    },
+    {
+        "id": "2",
+        "name": "kitKat"
+
+    },
+    {
+        "id": "3",
+        "name": " Mars "
+
+    },
+    {
+        "id": "4",
+        "name": "Galaxy"
+
+    },
+    {
+        "id": "5",
+        "name": "5star"
+
+    }],
+    "Phone": [
+    {
+        "id": "1",
+        "name": "Asus"
+
+    },
+    {
+        "id": "2",
+        "name": "samsung"
+
+    },
+    {
+        "id": "3",
+        "name": " iPhone "
+
+    },
+    {
+        "id": "4",
+        "name": "Redmi"
+
+    },
+    {
+        "id": "5",
+        "name": "Sony"
+
+    }],
+    "Laptop": [
+    {
+        "id": "1",
+        "name": "Asus"
+
+    },
+    {
+        "id": "2",
+        "name": "HP"
+
+    },
+    {
+        "id": "3",
+        "name": " Apple "
+
+    },
+    {
+        "id": "4",
+        "name": "Dell"
+
+    },
+    {
+        "id": "5",
+        "name": "Sony"
+
+    }],
+    "Program": [
+    {
+        "id": "1",
+        "name": "C++"
+
+    },
+    {
+        "id": "2",
+        "name": "AngularJs"
+
+    },
+    {
+        "id": "3",
+        "name": " JavaScript "
+
+    },
+    {
+        "id": "4",
+        "name": "BootStrap"
+
+    },
+    {
+        "id": "5",
+        "name": "NodeJs"
+
+    }]
+}
+}

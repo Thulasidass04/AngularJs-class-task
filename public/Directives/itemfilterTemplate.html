@@ -1,0 +1,4 @@
+<select ng-model="selectedItems" multiple="multiple" style="height: 200px; width: 250px;" 
+ ng-change="selectedItemsChangedDir()" ng-options="item.id as item.name group by item.model for item in items | orderBy:'name'">
+  <option>--</option>
+</select>

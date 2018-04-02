@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>UI-Router</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <div class="container">
+        <div class="col-sm-8" style="margin-top: 30px;">
+            <div class="row">
+                <div class="col-sm-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a ui-sref="home">Home</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a ui-sref="login">Login</a>
+                        </li>
+                        <!--    <li class="list-group-item">
+                            <a ui-sref="contactUs">ContactUs</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a ui-sref="login">Login</a>
+                            
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div ui-view=""></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div ui-view="uv1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        function myCtrl($scope, myServices) {
+            console.log('MYCTRL');
+            myServices.getData()
+                .then(function(list) {
+                    $scope.userList = list.response;
+                })
+                .catch(error => console.log('service -', error))
+                $scope.edit = function(){
+                console.log('Welcome');
+            }
+        }
+        myCtrl.$inject = ['$scope', 'myServices'];
+
+        function myServices($http, $q) {
+            this.getData = function() {
+                let defer = $q.defer();
+                $http.get('./test.json')
+                    .then(function(resdata) {
+                        console.log("Fac_Res", resdata);
+                        defer.resolve(resdata.data);
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                        defer.reject(err);
+                    })
+                return defer.promise;
+            }
+        }
+        myServices.$inject = ['$http', '$q'];
+
+        function uiRouter($stateProvider, $urlRouterProvider) {
+            $stateProvider
+                .state('home', {
+                    url: '/home',
+                    views: {
+                        "": {
+                            templateUrl: "./templates/home.html"
+                        },
+                        "uv1":{
+                            templateUrl: "./templates/about.html"
+
+                        }
+                    }
+                })
+                .state('login', {
+                    url: "/login",
+                    templateUrl: "./templates/login.html"
+                })
+            $urlRouterProvider.otherwise('home');
+        }
+        uiRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
+        angular.module('myApp', ['ui.router'])
+            .controller('myCtrl', myCtrl)
+            .config(uiRouter)
+            .service('myServices', myServices)
+        </script>
+        <script type="text/javascript">
+        angular.bootstrap(document.documentElement, ['myApp'], { strictDi: true })
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Views</title>
+	<link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+	<script type="text/javascript">
+		function myCtrl(){
+			console.log('MYCTRL');
+		}
+		angular.module('myApp',[])
+		  .controller('myCtrl',myCtrl)
+		  
+	</script>
+	<script type="text/javascript">
+		angular.bootstrap(document.documentElement,['myApp'],{strictDi: true});
+	</script>
+</body>
+</html>

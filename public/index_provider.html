@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Provider</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+    <!-- <script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script> -->
+</head>
+
+<body ng-controller="myCtrl">
+	<h3>{{userList}}</h3>
+
+	<script type="text/javascript">
+		function myCtrl($scope, sample){
+			sample.getData()
+			.then(list => {
+				$scope.userList = list;
+				console.log(list);
+			})
+		}
+
+		function sample(){
+			let name = "Hobbies";
+			this.$get = ['$http', '$q', function($http,$q){
+        		 let services = {};
+				services.getData = function(){
+				let defer = $q.defer();
+				$http.get('./' + name + '.json' )
+					.then(function(res){
+						defer.resolve(res.data.Data);
+					})
+					.catch(function(){
+						defer.reject(err);
+					})
+					return defer.promise;
+				}
+				return services;
+			}]
+		}
+
+		myCtrl.$inject = ['$scope','sample'];
+		sample.$inject = [];
+
+		angular.module('myApp',[])
+		.controller('myCtrl',myCtrl)
+		.provider('sample',sample)
+
+	</script>
+	<script type="text/javascript">
+		angular.bootstrap(document.documentElement,['myApp'],{strictDi:true});
+		
+	</script>
+   
+</body>
+
+</html>

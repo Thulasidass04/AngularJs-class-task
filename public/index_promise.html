@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Promise</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+	<h1>DataBase</h1>
+    {{userList}}
+    <script type="text/javascript">
+        function myCtrl($scope,myService){
+            console.log("Myctrl");
+            myService.getdata()
+            .then(function(list){
+                $scope.userList = list;
+                console.log($scope.userList);
+
+            },
+            function(err){
+                console.log(err);
+            })
+        }
+        myCtrl.$inject = ['$scope','myService'];
+
+        function myService($http,$q){
+            this.getdata = function(){
+                let defer = $q.defer();
+                $http.get('./test.json')
+                .then(function(resdata){
+                    console.log('Res_',resdata);
+                    defer.resolve(resdata.data);
+                })
+                .catch(function(err){
+                    console.log(err);
+                    defer.reject(err);
+                })
+                return defer.promise;
+            }
+        }
+        myService.$inject = ['$http','$q'];
+
+        angular.module('myApp',[])
+        .controller('myCtrl',myCtrl)
+        .service('myService',myService);
+    
+    </script>
+    <script type="text/javascript">
+    angular.bootstrap(document.documentElement, ['myApp'],{strictDi : true});
+    </script>
+</body>
+
+</html>

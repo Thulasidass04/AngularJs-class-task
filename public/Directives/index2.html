@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Directives1</title>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <div class="container">
+        <div class="col-md-6">
+        	<!-- <h1>{{userList}}</h1> -->
+         <div my-dir userList = "userList">{{userList}}</div>
+         <div ui-view></div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+    function myCtrl($scope) {
+        // $scope.limit = "10";
+        console.log('MYCTRL');
+    }
+    myCtrl.$inject = ['$scope'];
+
+    function myServices($http,$q){
+    	this.getList = function(){
+    		let defer = $q.defer();
+    		$http.get('../test.json')
+    		.then(function(data){
+    			console.log("Ser_Res",data);
+    			defer.resolve(data.data);
+    		})
+    		.catch(function(err){
+    			defer.reject(err);
+    		})
+    		return defer.promise;
+    	}
+    }
+    myServices.$inject = ['$http','$q'];
+    
+    function myDir() {
+        return {
+            restrict: "A",
+            scope: {
+                 // name: "@"
+            },
+            template: "<h1>{{userList}}</h1>",
+            controller: ['$scope','myServices', function($scope,myServices) {
+                myServices.getList()
+                .then(function(list){
+                	$scope.userList = list.response;
+                	console.log("Dir",list);
+                })
+                console.log("IN DIR", );
+            }]
+        }
+    }
+    angular.module('myApp', [])
+        .controller('myCtrl', myCtrl)
+        .service("myServices",myServices)
+        .directive('myDir', myDir)
+        
+    </script>
+    <script type="text/javascript">
+    angular.bootstrap(document.documentElement, ['myApp'], { strictDi: true });
+    </script>
+</body>
+
+</html>

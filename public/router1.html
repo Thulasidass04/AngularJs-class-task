@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>UI-Router</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <div class="container">
+        <div class="col-sm-8" style="margin-top: 30px;">
+            <div class="row">
+                <div class="col-sm-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a ui-sref="home">Home</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a ui-sref="about">About</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a ui-sref="contactUs">ContactUs</a>
+                        </li>
+                        <li class="list-group-item">
+                        	<a ui-sref="login">Login</a>
+                        	
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div ui-view=""></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div ui-view="uv1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        angular.module('myApp', ['ui.router'])
+           .controller('myCtrl',function ($scope,list) {
+		 	console.log('MYCTRL');
+		 	list.getUserList(function(dataResponse){
+		 		console.log('Res',dataResponse);
+		 		$scope.userList = dataResponse.data.response;
+
+		 	})
+		 	$scope.edit = function(data){
+                let user=data.user -1;
+		 		 editUser = $scope.userList.filter(list => {
+		 			return list.id == data;
+		 		})
+               const {id, name, age } = editUser[0];
+                $scope.register = {};
+                $scope.register = { id, name, age };
+            }
+
+            $scope.Delete = function(data){
+            	$scope.userList.splice(data,1);
+
+            }
+
+            $scope.RegisterMe = function(data){
+            	let id =data.id -1;
+            	$scope.userList.splice(id,1,data);
+            	console.log($scope.userList);
+            }
+		 })
+         
+         .factory('list',function($http){
+         	let user = {};
+         	user.getUserList = function(cb){
+         		$http.get('./test.json')
+                .then(function(resData){
+                	console.log('Fac_Res',resData);
+                	cb(resData);
+                 },function(err){
+                 	console.log(err);
+                 	cb(err);
+                 })
+         	}
+
+         	return user;
+         })
+
+            .controller('HomeCtrl', function() {
+                console.log('Homectrl');
+            })
+            .controller('ListCtrl', function() {
+                console.log('ListCtrl');
+            })
+            .controller('AboutCtrl', function() {
+                console.log('AboutCtrl');
+            })
+            .controller('ContactCtrl', function() {
+                console.log('ContactCtrl');
+            })
+            .controller('LoginCtrl',function(){
+            	console.log('LoginCtrl');
+            })
+
+            .config(function($stateProvider, $urlRouterProvider) {
+                $stateProvider
+                    .state('home', {
+                        url: '/home',
+                        views: {
+                            "": {
+                                templateUrl: './templates/home.html',
+                                controller: "HomeCtrl"
+                            },
+                            "uv1": {
+                                templateUrl: './templates/list.html',
+                                controller: "ListCtrl"
+
+                            }
+                        }
+
+                    })
+                    .state('about', {
+                        url: '/about',
+                        views: {
+                            "": {
+                                templateUrl: './templates/about.html',
+                                controller: "AboutCtrl"
+                            }
+                        }
+
+                    })
+                    .state('contactUs', {
+                        url: '/contactUs',
+                        views: {
+                            "": {
+                                templateUrl: './templates/contactUs.html',
+                                controller: 'ContactCtrl'
+                            }
+                        }
+
+                    })
+                    .state('login',{
+                    	url : "/login",
+                    	views :{
+                    		"":{
+                    			 templateUrl: './templates/login.html',
+                                controller: 'LoginCtrl'
+                            }
+
+                    		}
+                    	
+                    })
+                $urlRouterProvider.otherwise('home');
+            })
+        </script>
+</body>
+
+</html>

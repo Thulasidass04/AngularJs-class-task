@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>NodeJs</title>
+	<link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+	<div class="container">
+  	<div class="col-md-4">
+  		<h1>Factory Empolye Details</h1>
+  		<form class="control-group" name="AddData" ng-sumbit="RegisterMe()">
+        	<label><b>ID:</b></label>
+        	<input type="text" name="id" ng-model="register.id" class="form-control" required>
+        	<label><b>Name:</b></label>
+        	<input type="text" name="name" ng-model="register.name" class="form-control" required>
+        	<label><b>Age:</b></label>
+        	<input type="text" name="age" ng-model="register.age" class="form-control" required><br>
+
+        	<button class="btn btn-success" ng-click="RegisterMe(register)">Register</button>
+        	
+        </form><br>
+
+  		<table class="table table-striped table-bordered">
+  			<thead>
+  				<th>ID</th>
+  				<th>Name</th>
+  				<th>Age</th>
+  				<th>Edit</th>
+  				<th>Delete</th>
+  			</thead>
+
+  			<tbody>
+  				<tr ng-repeat="user in userList">
+  					<td>{{user.id}}</td>
+  					<td>{{user.name}}</td>
+  					<td>{{user.age}}</td>
+  					<td><button ng-click="edit(user.id)">Edit</button></td>
+  					<td><button ng-click="Delete($index)">Delete</button></td>
+
+  				</tr>
+  			</tbody>
+  			
+  		</table>
+  		
+  	</div>
+  	
+  </div>            
+
+
+	<script type="text/javascript">
+		angular.module('myApp',[])
+		 .controller('myCtrl',function ($scope,list) {
+		 	console.log('MYCTRL');
+		 	list.getUserList(function(dataResponse){
+		 		console.log('Res',dataResponse);
+		 		$scope.userList = dataResponse.data.response;
+
+		 	})
+		 	$scope.edit = function(data){
+		 		 editUser = $scope.userList.filter(list => {
+		 			return list.id == data;
+		 		})
+         $scope.abc = editUser[0];
+                $scope.register = {};
+                $scope.register.id = $scope.abc.id;
+                $scope.register.name = $scope.abc.name;
+                $scope.register.age = $scope.abc.age;
+             
+            }
+
+            $scope.Delete = function(data){
+            	$scope.userList.splice(data,1);
+
+            }
+
+            $scope.RegisterMe = function(data){
+            	let id =data.id -1;
+            	$scope.userList.splice(id,1,data);
+            	console.log($scope.userList);
+            }
+		 })
+         
+         .factory('list',function($http){
+         	let user = {};
+         	user.getUserList = function(cb){
+         		$http.get('./sample.json')
+                .then(function(resData){
+                	console.log('Fac_Res',resData);
+                	cb(resData);
+                 },function(err){
+                 	console.log(err);
+                 	cb(err);
+                 })
+         	}
+
+         	return user;
+         })
+
+	</script>
+
+</body>
+</html>

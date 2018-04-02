@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Directives1</title>
+	<link rel="stylesheet" type="text/css" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+</head>
+<body ng-controller = "myCtrl">
+	<h1>{{limit}}</h1>
+	Attr - <div my-dir limit = "limit" ></div>
+	<!-- Element - <my-dir></my-dir> -->
+	<script type="text/javascript">
+		function myCtrl($scope){
+			$scope.limit = "Dirrrrrrr";
+			console.log('MYCTRL');
+		}
+		myCtrl.$inject = ['$scope'];
+		
+		function myDir(){
+			return{
+				restrict : 'A',
+				 scope : {
+				 	limit : "=",
+				 	  // name : "@"
+				 },
+				template : "<h1>{{limit}}</h1>",
+				controller : ["$scope",function($scope){
+					$scope.limit = "10";
+					// $scope.name = "prakash"
+					console.log("in dir",$scope.limit);
+				}]
+			}
+		}
+		angular.module('myApp',[])
+		   .controller('myCtrl',myCtrl)
+		   // .provider('Sample',Sample)
+		   .directive('myDir',myDir)
+	</script>
+	<script type="text/javascript">
+		angular.bootstrap(document.documentElement,['myApp'],{strictDi : true});
+	</script>
+
+</body>
+</html>

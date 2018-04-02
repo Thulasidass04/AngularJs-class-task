@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Directives</title>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <!-- <h1>{{userList}}</h1> -->
+    Attr -
+    <div my-dir userList="userList"></div>
+    Element -
+    <my-dir name="mean"></my-dir>
+    <script type="text/javascript">
+    function myCtrl($scope) {
+
+        console.log('MYCTRL');
+    }
+    myCtrl.$inject = ['$scope'];
+
+    function Sample() {
+        let name = "user-list";
+        this.$get = ['$http', '$q', function($http, $q) {
+            console.log('MYPROVIDER');
+            let services = {};
+            services.getData = function() {
+                let defer = $q.defer();
+                $http.get('../' + name + '.json')
+                    .then(function(res) {
+                        defer.resolve(res.data.Data);
+                    })
+                    .catch(function() {
+                        defer.reject(err);
+                    })
+                return defer.promise;
+            }
+            return services;
+        }]
+    }
+
+    function myDir() {
+        return {
+            restrict: 'A',
+            scope: {},
+            templateUrl: "./dir.tpl.html",
+            controller: ["$scope", "Sample", function($scope, Sample) {
+                Sample.getData()
+                    .then(function(list) {
+                        $scope.userList = list;
+                        console.log("in dir", $scope.userList);
+
+                    })
+                $scope.edit = function(data) {
+                    editUser = $scope.userList.filter(list => {
+                        return list.id == data;
+                    })
+                    $scope.abc = editUser[0];
+                    $scope.register = {};
+                    $scope.register.id = $scope.abc.id;
+                    $scope.register.name = $scope.abc.name;
+                    $scope.register.age = $scope.abc.age;
+                }
+                $scope.Deleted = function(data) {
+                    $scope.userList.splice(data, 1);
+                }
+                $scope.RegisterMe = function(data) {
+                    let id = data.id - 1;
+                    $scope.userList.splice(id, 1, data);
+                    console.log($scope.userList);
+                }
+            }]
+        }
+    }
+    angular.module('myApp', [])
+        .controller('myCtrl', myCtrl)
+        .provider('Sample', Sample)
+        .directive('myDir', myDir)
+    </script>
+    <script type="text/javascript">
+    angular.bootstrap(document.documentElement, ['myApp'], { strictDi: true });
+    </script>
+</body>
+
+</html>

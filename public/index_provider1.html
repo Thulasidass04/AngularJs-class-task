@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Service Practise</title>
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./lib/angular/angular.min.js"></script>
+</head>
+
+<body class="container" ng-controller="lieCtrl">
+   <script type="text/javascript">
+
+    function lieFun($scope,sample){
+            console.log('In Lie Ctrl');
+
+           sample.getName()
+           .then(userdata => {
+            console.log(userdata);
+                $scope.userData = userdata;
+
+                console.log($scope.userData);
+             })
+
+    }
+
+
+    function sample(){    
+
+        let a = "games";
+
+        this.$get =['$http',function($http){
+
+            let service = {};
+
+            service.getName = function(){
+
+                return $http.get('./sample1.json')
+                .then(function(name){
+                    console.log(name.data.data)
+                    return name.data[a];
+
+
+                })
+               
+            }
+            return service;
+        }]
+    }
+
+    // function sampleProvider(sampleProvider){
+    //     console.log('In Sample Provide');
+    // }
+
+    sample.$inject = [];
+
+    lieFun.$inject = ['$scope','sample'];
+
+   // sampleProvider.$inject = ['sampleProvider'];
+
+
+    angular.module('lie',[])
+
+    .controller('lieCtrl',lieFun)
+
+   // .config(sampleProvider)
+
+    .provider('sample',sample)
+
+       angular.bootstrap(document.documentElement,['lie'],{strictDi : true});
+   </script>
+</body>
+
+</html>
